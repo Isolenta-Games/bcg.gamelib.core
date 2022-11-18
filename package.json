@@ -1,0 +1,7 @@
+{
+  "name": "com.gamelib.core",
+  "version": "1.0.0",
+  "displayName": "GameLib Core",
+  "Unity": "2020.3.33f",
+  "description": "BlackCaviarGames internal core framework."
+}
