@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>GameLib.Core</RootNamespace>
+        
+        <Title>GameLib Core</Title>
+
+        <VersionMajor>1</VersionMajor>
+        <VersionMinor>0</VersionMinor>
+	    <LangVersion>8.0</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Description>BlackCaviarGames internal core framework.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+	<ItemGroup>
+		<None Remove="**/*.meta" />
+	</ItemGroup>
+
+    <!-- TODO, move to external props target -->
+    <PropertyGroup Condition=" '$(GITLAB_CI)' != '' AND '$(CI_COMMIT_BRANCH)' != '$(CI_DEFAULT_BRANCH)' ">
+        <VersionBuild>$(CI_PIPELINE_IID)</VersionBuild>
+        <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(GITLAB_CI)' != '' AND '$(CI_COMMIT_BRANCH)' == '$(CI_DEFAULT_BRANCH)' ">
+        <VersionPrefix>$(VersionMajor).$(VersionMinor)</VersionPrefix>
+    </PropertyGroup>
+
+    <Target Name="Production" Condition=" '$(GITLAB_CI)' != '' AND '$(CI_COMMIT_BRANCH)' != '$(CI_DEFAULT_BRANCH)' " BeforeTargets="Build">
+        <Message Importance="high" Text="Using a msbuild props for set version: $(VersionPrefix), branch $(CI_DEFAULT_BRANCH) type: DEV BUILD" />
+    </Target>
+    <Target Name="Production" Condition=" '$(GITLAB_CI)' != '' AND '$(CI_COMMIT_BRANCH)' == '$(CI_DEFAULT_BRANCH)' " BeforeTargets="Build">
+        <Message Importance="high" Text="Using a msbuild props for set version: $(VersionPrefix), branch $(CI_DEFAULT_BRANCH) type: PRODUCTION BUILD" />
+    </Target>
+
+    <PropertyGroup Condition=" '$(GITLAB_CI)' != '' ">
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <RepositoryUrl>$(CI_REPOSITORY_URL)</RepositoryUrl>
+        <RepositoryBranch>$(CI_COMMIT_BRANCH)</RepositoryBranch>
+        <RepositoryCommit>$(CI_COMMIT_SHA)</RepositoryCommit>
+    </PropertyGroup>
+</Project>
