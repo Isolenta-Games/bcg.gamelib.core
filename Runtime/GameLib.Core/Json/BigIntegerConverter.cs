@@ -2,7 +2,11 @@ using System;
 using System.Numerics;
 using GameLib.Core.Parsers.Base;
 using Newtonsoft.Json;
+#if UNITY_2017_1_OR_NEWER
 using UnityEngine;
+#else 
+using System.Diagnostics;
+#endif
 
 namespace GameLib.Core.Json
 {
