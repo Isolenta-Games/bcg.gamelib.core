@@ -77,8 +77,8 @@ release:
       when: always
     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH' # Run pipelines on any other branch
       when: always
-  artifacts:
-    paths:
-      - publish/
+#  artifacts:
+#    paths:
+#      - publish/
   tags:
     - docker
