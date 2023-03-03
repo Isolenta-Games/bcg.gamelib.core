@@ -241,7 +241,7 @@ namespace GameLib.Core.Parsers
 
 			return DateTime.TryParseExact(dateString, format, CultureInfo.InvariantCulture, DateTimeStyles.None,
 				out var result)
-				? new DateTime(result.Ticks, DateTimeKind.Utc)
+				? result.ToUniversalTime()
 				: defaultVal ??
 				throw row.MakeError($"Cannot convert column '{columnName}' ({raw}) to DateTime ({format})!");
 		}
@@ -279,7 +279,7 @@ namespace GameLib.Core.Parsers
 		{
 			return new RangeF(row.GetFloat(columnWithMin), row.GetFloat(columnWithMax));
 		}
-
+		
 		public static T GetValue<T>(this IRawTableRow row, string columnName)
 		{
 			return (T)row.GetValue(columnName, TypeOf<T>.Raw);
@@ -330,6 +330,11 @@ namespace GameLib.Core.Parsers
 			if (valueType.IsEnum)
 			{
 				return row.GetEnum(columnName, valueType);
+			}
+
+			if (valueType == typeof(DateTime))
+			{
+				return row.GetDateTimeUTC(columnName, "dd/MM/yyyy HH:mm:ss z");
 			}
 
 			throw row.MakeError($"Type '{valueType.FullName}' is not supported!");
