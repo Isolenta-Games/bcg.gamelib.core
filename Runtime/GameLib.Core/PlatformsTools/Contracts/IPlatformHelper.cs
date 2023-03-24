@@ -1,6 +1,6 @@
 ﻿namespace GameLib.Core.PlatformsTools.Contracts
 {
-	public interface IPlatformHelper
+	internal interface IPlatformHelper
 	{
 		public bool TryGetDeviceCountry(out string twoLettersCountryCode);
 	}

@@ -1,8 +1,7 @@
 {
     "name": "GameLib.Core",
     "references": [
-        "UniTask",
-        "Zenject"
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
