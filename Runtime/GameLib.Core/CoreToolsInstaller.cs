@@ -12,7 +12,7 @@ namespace GameLib.Core
 			var platformHelper = CreatePlatformHelper();
 			var type = platformHelper.GetType();
 
-			Container.BindInterfacesTo(type).FromInstance(platformHelper);
+			Container.BindInterfacesTo(type).FromInstance(platformHelper).AsSingle();
 			Container.Inject(platformHelper);
 
 			Debug.Log($"[Platforms]: bind {type.Name}");
