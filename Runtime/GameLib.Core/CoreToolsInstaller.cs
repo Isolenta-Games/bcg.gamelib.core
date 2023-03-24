@@ -1,5 +1,5 @@
-﻿using GameLib.Core.Contracts;
-using GameLib.Core.Internal;
+﻿using GameLib.Core.PlatformsTools.Contracts;
+using GameLib.Core.PlatformsTools.Internal;
 using UnityEngine;
 using Zenject;
 

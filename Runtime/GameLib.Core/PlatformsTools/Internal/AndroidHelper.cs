@@ -1,7 +1,7 @@
-﻿using GameLib.Core.Contracts;
+﻿using GameLib.Core.PlatformsTools.Contracts;
 using UnityEngine;
 
-namespace GameLib.Core.Internal
+namespace GameLib.Core.PlatformsTools.Internal
 {
 	internal class AndroidHelper : IPlatformHelper
 	{

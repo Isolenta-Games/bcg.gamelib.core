@@ -1,4 +1,4 @@
-﻿namespace GameLib.Core.Contracts
+﻿namespace GameLib.Core.PlatformsTools.Contracts
 {
 	public interface IPlatformHelper
 	{
