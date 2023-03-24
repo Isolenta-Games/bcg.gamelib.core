@@ -1,7 +1,7 @@
-﻿using GameLib.Core.PlatformsTools.Contracts;
-using GameLib.Core.PlatformsTools.Internal;
+﻿using GameLib.Core.UnityTools.PlatformsTools.Contracts;
+using GameLib.Core.UnityTools.PlatformsTools.Internal;
 
-namespace GameLib.Core.PlatformsTools
+namespace GameLib.Core.UnityTools.PlatformsTools
 {
 	public static class PlatformHelper
 	{

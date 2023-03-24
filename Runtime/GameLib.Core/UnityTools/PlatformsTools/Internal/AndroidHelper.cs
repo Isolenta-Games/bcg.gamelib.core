@@ -1,7 +1,8 @@
-﻿using GameLib.Core.PlatformsTools.Contracts;
+﻿#if UNITY_2020_3_OR_NEWER
+using GameLib.Core.UnityTools.PlatformsTools.Contracts;
 using UnityEngine;
 
-namespace GameLib.Core.PlatformsTools.Internal
+namespace GameLib.Core.UnityTools.PlatformsTools.Internal
 {
 	internal class AndroidHelper : IPlatformHelper
 	{
@@ -36,3 +37,4 @@ namespace GameLib.Core.PlatformsTools.Internal
 		}
 	}
 }
+#endif

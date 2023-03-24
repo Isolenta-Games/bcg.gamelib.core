@@ -1,4 +1,4 @@
-﻿namespace GameLib.Core.PlatformsTools.Contracts
+﻿namespace GameLib.Core.UnityTools.PlatformsTools.Contracts
 {
 	internal interface IPlatformHelper
 	{

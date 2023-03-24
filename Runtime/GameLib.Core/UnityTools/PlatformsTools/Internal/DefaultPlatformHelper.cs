@@ -1,6 +1,6 @@
-﻿using GameLib.Core.PlatformsTools.Contracts;
+﻿using GameLib.Core.UnityTools.PlatformsTools.Contracts;
 
-namespace GameLib.Core.PlatformsTools.Internal
+namespace GameLib.Core.UnityTools.PlatformsTools.Internal
 {
 	internal class DefaultPlatformHelper : IPlatformHelper
 	{
