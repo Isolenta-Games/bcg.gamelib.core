@@ -6,7 +6,7 @@
         <Title>GameLib Core</Title>
 
         <VersionMajor>1</VersionMajor>
-        <VersionMinor>1</VersionMinor>
+        <VersionMinor>2</VersionMinor>
 	    <LangVersion>8.0</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Description>BlackCaviarGames internal core framework.</Description>
@@ -18,6 +18,12 @@
 	<ItemGroup>
 		<None Remove="**/*.meta" />
 	</ItemGroup>
+    <ItemGroup>
+        <Compile Remove="UnityTools\**" />
+        <Content Remove="UnityTools\**" />
+        <EmbeddedResource Remove="UnityTools\**" />
+        <None Remove="UnityTools\**" />
+    </ItemGroup>
 
     <!-- TODO, move to external props target -->
     <PropertyGroup Condition=" '$(GITLAB_CI)' != '' AND '$(CI_COMMIT_BRANCH)' != '$(CI_DEFAULT_BRANCH)' ">
