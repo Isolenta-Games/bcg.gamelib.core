@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace GameLib.Core.AsyncEx
 {
 	public class AsyncEvent
 	{
-		private TaskCompletionSource<bool> _tcs = new TaskCompletionSource<bool>();
+		private UniTaskCompletionSource<bool> _tcs = new UniTaskCompletionSource<bool>();
 
 		public void Reset()
 		{
 			var oldTcs = _tcs;
 			oldTcs?.TrySetCanceled();
 
-			_tcs = new TaskCompletionSource<bool>();
+			_tcs = new UniTaskCompletionSource<bool>();
 		}
 
 		public void FireEvent()
 		{
+			Debug.LogError("FireEvent");
 			_tcs.TrySetResult(true);
 		}
 
@@ -26,14 +29,19 @@ namespace GameLib.Core.AsyncEx
 			_tcs.TrySetException(ex);
 		}
 
-		public async Task WaitAsync()
+		public async UniTask WaitAsync()
 		{
 			await _tcs.Task;
 		}
 
-		public async Task WaitAsync(CancellationToken ct)
+		public async UniTask WaitAsync(CancellationToken ct)
 		{
-			await _tcs.Task.WaitAsync(ct);
+			ct.Register(state =>
+			{
+				var task = (UniTaskCompletionSource<bool>)state;
+				task.TrySetCanceled(ct);
+			}, _tcs);
+			await _tcs.Task;
 		}
 		
 	}
