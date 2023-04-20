@@ -20,7 +20,6 @@ namespace GameLib.Core.AsyncEx
 
 		public void FireEvent()
 		{
-			Debug.LogError("FireEvent");
 			_tcs.TrySetResult(true);
 		}
 
