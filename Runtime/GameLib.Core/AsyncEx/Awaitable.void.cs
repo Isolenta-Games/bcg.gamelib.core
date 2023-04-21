@@ -11,15 +11,7 @@
 #else
     using System.Threading.Tasks;
 #endif
-
-#if UNITY_2018_1_OR_NEWER
-    internal sealed class AsyncMethodBuilderAttribute : Attribute
-    {
-        public Type BuilderType { get; }
-
-        public AsyncMethodBuilderAttribute(Type builderType) => this.BuilderType = builderType;
-    }
-#endif
+    
 
 #if NETSTANDARD2_0_OR_GREATER || (CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NETSTANDARD2_0_OR_GREATER || NET_4_6)))
     [AsyncMethodBuilder(typeof(AsyncAwaitableMethodBuilder))]
@@ -84,7 +76,9 @@
 
         public void SetStateMachine(IAsyncStateMachine stateMachine)
             => methodBuilder.SetStateMachine(stateMachine);
-        
+
+        public void SetResult()
+            => methodBuilder.SetResult();
 
         public void SetException(Exception exception)
             => methodBuilder.SetException(exception);
