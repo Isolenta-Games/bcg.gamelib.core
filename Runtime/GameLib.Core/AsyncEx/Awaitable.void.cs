@@ -4,6 +4,7 @@
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security;
+    using System.Diagnostics;
 #if UNITY_2018_1_OR_NEWER
     using Cysharp.Threading.Tasks;
     using Cysharp.Threading.Tasks.CompilerServices;
@@ -11,7 +12,7 @@
     using System.Threading.Tasks;
 #endif
 
-#if NETSTANDARD2_0_OR_GREATER || (CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NETSTANDARD2_0_OR_GREATER || NET_4_6)))
+#if UNITY_2018_1_OR_NEWER
     internal sealed class AsyncMethodBuilderAttribute : Attribute
     {
         public Type BuilderType { get; }
@@ -45,7 +46,8 @@
         {
             this.rawTaskValue = rawTaskValue;
         }
-
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public
 #if UNITY_2018_1_OR_NEWER
             UniTask.Awaiter
