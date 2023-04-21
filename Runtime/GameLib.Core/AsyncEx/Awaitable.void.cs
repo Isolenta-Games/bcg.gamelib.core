@@ -12,6 +12,15 @@
 #endif
 
 #if NETSTANDARD2_0_OR_GREATER || (CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NETSTANDARD2_0_OR_GREATER || NET_4_6)))
+    internal sealed class AsyncMethodBuilderAttribute : Attribute
+    {
+        public Type BuilderType { get; }
+
+        public AsyncMethodBuilderAttribute(Type builderType) => this.BuilderType = builderType;
+    }
+#endif
+
+#if NETSTANDARD2_0_OR_GREATER || (CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NETSTANDARD2_0_OR_GREATER || NET_4_6)))
     [AsyncMethodBuilder(typeof(AsyncAwaitableMethodBuilder))]
     [StructLayout(LayoutKind.Auto)]
 #endif
@@ -54,7 +63,7 @@
     public struct AsyncAwaitableMethodBuilder
     {
 #if UNITY_2018_1_OR_NEWER
-        private AsyncUniTaskMethodBuilder<T> methodBuilder;
+        private AsyncUniTaskMethodBuilder methodBuilder;
 #else
         private AsyncTaskMethodBuilder methodBuilder;
 #endif
@@ -62,7 +71,7 @@
             => new AsyncAwaitableMethodBuilder
             {
 #if UNITY_2018_1_OR_NEWER
-                methodBuilder = AsyncUniTaskMethodBuilder<T>.Create()
+                methodBuilder = AsyncUniTaskMethodBuilder.Create()
 #else
                 methodBuilder = AsyncTaskMethodBuilder.Create()
 #endif
