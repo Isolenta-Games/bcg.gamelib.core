@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GameLib.Core.AsyncEx
 {
 	public class AsyncEvent
 	{
-		private TaskCompletionSource<bool> _tcs = new TaskCompletionSource<bool>();
+		private AwaitableCompletionSource<bool> _tcs = new AwaitableCompletionSource<bool>();
 
 		public void Reset()
 		{
 			var oldTcs = _tcs;
 			oldTcs?.TrySetCanceled();
 
-			_tcs = new TaskCompletionSource<bool>();
+			_tcs = new AwaitableCompletionSource<bool>();
 		}
 
 		public void FireEvent()
@@ -26,14 +25,19 @@ namespace GameLib.Core.AsyncEx
 			_tcs.TrySetException(ex);
 		}
 
-		public async Task WaitAsync()
+		public async Awaitable WaitAsync()
 		{
 			await _tcs.Task;
 		}
 
-		public async Task WaitAsync(CancellationToken ct)
+		public async Awaitable WaitAsync(CancellationToken ct)
 		{
-			await _tcs.Task.WaitAsync(ct);
+			ct.Register(state =>
+			{
+				var task = (AwaitableCompletionSource<bool>)state;
+				task.TrySetCanceled(ct);
+			}, _tcs);
+			await _tcs.Task;
 		}
 		
 	}
