@@ -1,6 +1,7 @@
 ﻿using System;
 using GameLib.Core.CommonTypes;
 using Newtonsoft.Json;
+using Range = GameLib.Core.CommonTypes.Range;
 
 namespace GameLib.Core.Json
 {

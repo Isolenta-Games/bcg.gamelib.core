@@ -6,6 +6,7 @@ using System.Numerics;
 using GameLib.Core.CommonTypes;
 using GameLib.Core.Parsers.Internal;
 using GameLib.Core.Utils;
+using Range = GameLib.Core.CommonTypes.Range;
 
 namespace GameLib.Core.Parsers
 {
