@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace GameLib.Core.Reflection
 {
@@ -78,6 +81,25 @@ namespace GameLib.Core.Reflection
 			}
 
 			return false;
+		}
+		
+		public static IReadOnlyList<Type> GetDerivedTypes<T>()
+		{
+			var baseType = typeof(T);
+			var types = new List<Type>();
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+			foreach (var assembly in assemblies)
+			{
+				try
+				{
+					types.AddRange(assembly.GetTypes().Where(t => !t.IsAbstract && baseType.IsAssignableFrom(t)).ToArray());
+				}
+				catch (ReflectionTypeLoadException)
+				{
+				}
+			}
+
+			return types;
 		}
 	}
 }
