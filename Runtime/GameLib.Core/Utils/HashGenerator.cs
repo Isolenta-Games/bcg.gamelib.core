@@ -31,7 +31,7 @@ namespace GameLib.Core.Utils
 		private static (Format, string) ExtractFormat(string str)
 		{
 			var fmt = Encoding.UTF8.GetString(Convert.FromBase64String(str)).Split(';');
-			return (Enum.Parse<Format>(fmt[0]), fmt[1]);
+			return ((Format)Enum.Parse(typeof(Format), fmt[0]), fmt[1]);
 		}
 
 		private static byte[] CRC64Hash(string content) => Crc64.Hash(Encoding.UTF8.GetBytes(content));
