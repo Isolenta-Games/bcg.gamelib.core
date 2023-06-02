@@ -6,7 +6,7 @@
         <Title>GameLib Core</Title>
 
         <VersionMajor>1</VersionMajor>
-        <VersionMinor>2</VersionMinor>
+        <VersionMinor>3</VersionMinor>
 	    <LangVersion>8.0</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Description>BlackCaviarGames internal core framework.</Description>
