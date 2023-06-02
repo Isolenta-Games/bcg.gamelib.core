@@ -9,7 +9,7 @@ namespace GameLib.Core.Utils
 		public enum Format
 		{
 			CRC64,
-			//SHA1
+			//SHA1 //uncomment if SHA1 will be needed
 		}
 
 		public static string GenerateHash(Format fmt, string content)
@@ -35,5 +35,7 @@ namespace GameLib.Core.Utils
 		}
 
 		private static byte[] CRC64Hash(string content) => Crc64.Hash(Encoding.UTF8.GetBytes(content));
+		
+		//private static byte[] SHA1Hash(string content) => SHA1.HashData(Encoding.UTF8.GetBytes(content));
 	}
 }
