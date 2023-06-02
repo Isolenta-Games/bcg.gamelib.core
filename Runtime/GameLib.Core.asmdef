@@ -8,7 +8,8 @@
     "allowUnsafeCode": true,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "System.IO.Hashing.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],
