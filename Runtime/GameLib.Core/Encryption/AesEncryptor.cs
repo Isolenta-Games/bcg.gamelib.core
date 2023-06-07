@@ -6,7 +6,7 @@ namespace GameLib.Core.Encryption
 {
 	public class AesEncryptor : IEncryptor, IDisposable
 	{
-		public static AesEncryptor Default => new("/B?E(H+MbQeThWmZ", "&E)H@McQ");
+		public static AesEncryptor Default => new AesEncryptor("/B?E(H+MbQeThWmZ", "&E)H@McQ");
 
 		private readonly Aes _aes;
 		
