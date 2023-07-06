@@ -44,12 +44,16 @@ namespace GameLib.Core.Json
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			Debug.Assert(reader.TokenType == JsonToken.String);
-			var str = (string)reader.Value;
+			var str = reader.Value.ToString();
 			if (!_forceToString)
 			{
-				var bytes = Base64Encoder.Default.FromBase(str);
-				return new BigInteger(bytes);
+				BigInteger result;
+				if (!BigInteger.TryParse(str, out result))
+				{
+					var bytes = Base64Encoder.Default.FromBase(str);
+					return new BigInteger(bytes);
+				}
+				return result;
 			}
 			else
 			{
